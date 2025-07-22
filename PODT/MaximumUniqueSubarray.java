@@ -3,7 +3,7 @@ package PODT;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Solution {
+public class MaximumUniqueSubarray {
     public int maximumUniqueSubarray(int[] nums) {
         Set<Integer> st = new HashSet<>();
         int left = 0, currentSum = 0, maxSum = 0;
@@ -24,7 +24,7 @@ public class Solution {
 
     // Main method to test the solution
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        MaximumUniqueSubarray sol = new MaximumUniqueSubarray();
         
         // Example input
         int[] nums = {4, 2, 4, 5, 6};
