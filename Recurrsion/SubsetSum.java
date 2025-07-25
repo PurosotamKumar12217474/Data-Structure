@@ -25,34 +25,57 @@ public class SubsetSum {
 
 
     // Function to find any one subset that sums up to targetSum
-    static boolean printS(int ind, List<Integer> list, int s, int sum, int[] arr, int n) {
+    // static boolean printS(int ind, List<Integer> list, int s, int sum, int[] arr, int n) {
+    //     if (ind == n) {
+    //         if (s == sum) {
+    //             for (int num : list) {
+    //                 System.out.print(num + " ");
+    //             }
+    //             System.out.println();
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+
+    //     // Pick the current element
+    //     list.add(arr[ind]);
+    //     s += arr[ind];
+    //     if (printS(ind + 1, list, s, sum, arr, n)) {
+    //         return true;
+    //     }
+
+    //     // Backtrack and not pick the current element
+    //     s -= arr[ind];
+    //     list.remove(list.size() - 1);
+
+    //     if (printS(ind + 1, list, s, sum, arr, n)) {
+    //         return true;
+    //     }
+
+    //     return false;
+    // }
+
+
+    
+
+    // Function to count subsets that sum up to a given target
+    static int printS(int ind, int s, int sum, int[] arr, int n) {
         if (ind == n) {
-            if (s == sum) {
-                for (int num : list) {
-                    System.out.print(num + " ");
-                }
-                System.out.println();
-                return true;
-            }
-            return false;
+            // If condition is satisfied, count this subset
+            return s == sum ? 1 : 0;
         }
 
         // Pick the current element
-        list.add(arr[ind]);
         s += arr[ind];
-        if (printS(ind + 1, list, s, sum, arr, n)) {
-            return true;
-        }
+        int l = printS(ind + 1, s, sum, arr, n);
 
-        // Backtrack and not pick the current element
+        // Backtrack
         s -= arr[ind];
-        list.remove(list.size() - 1);
 
-        if (printS(ind + 1, list, s, sum, arr, n)) {
-            return true;
-        }
+        // Don't pick the current element
+        int r = printS(ind + 1, s, sum, arr, n);
 
-        return false;
+        return l + r;
     }
 
     public static void main(String[] args) {
@@ -60,7 +83,7 @@ public class SubsetSum {
         int n = arr.length;
         int targetSum = 2;
 
-        List<Integer> currentSubset = new ArrayList<>();
-        printS(0, currentSubset, 0, targetSum, arr, n);
+        int count = printS(0, 0, targetSum, arr, n);
+        System.out.println("Number of subsets with sum " + targetSum + " = " + count);
     }
 }
